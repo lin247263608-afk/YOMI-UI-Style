@@ -193,7 +193,7 @@ const styles: Style[] = [
 
 
 function StyleGuide() {
-  const [active, setActive] = useState("ins");
+  const [active, setActive] = useState("business");
   const style = styles.find((s) => s.id === active)!;
 
   return (
