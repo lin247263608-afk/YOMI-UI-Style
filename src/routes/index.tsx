@@ -21,6 +21,10 @@ import { PassengerHomeV6 } from "@/components/style-guide/v6/PassengerHomeV6";
 import { PassengerOrderFormV6 } from "@/components/style-guide/v6/PassengerOrderFormV6";
 import { DriverHomeV6 } from "@/components/style-guide/v6/DriverHomeV6";
 import { DriverOrderPoolV6 } from "@/components/style-guide/v6/DriverOrderPoolV6";
+import { PassengerHomeV7 } from "@/components/style-guide/v7/PassengerHomeV7";
+import { PassengerOrderFormV7 } from "@/components/style-guide/v7/PassengerOrderFormV7";
+import { DriverHomeV7 } from "@/components/style-guide/v7/DriverHomeV7";
+import { DriverOrderPoolV7 } from "@/components/style-guide/v7/DriverOrderPoolV7";
 import { cn } from "@/lib/utils";
 
 
@@ -45,7 +49,7 @@ export const Route = createFileRoute("/")({
   component: StyleGuide,
 });
 
-type Screen = { code: string; label: string; node: React.ReactNode; dark?: boolean; fluid?: boolean };
+type Screen = { code: string; label: string; node: React.ReactNode; dark?: boolean; fluid?: boolean; statusBar?: "haze" | "flat" };
 
 type Style = {
   id: string;
@@ -101,6 +105,28 @@ const styles: Style[] = [
     ],
   },
   {
+    id: "soft-business",
+    name: "Soft Business",
+    summary: "轻商务：柔雾色头尾包裹的极简组件",
+    inspiration:
+      "灵感来自清晨机场落地窗外的雾蓝天色：头部与底部以大面积柔雾蓝铺底，中间留给克制的白色卡片，商务感来自结构而不是重色。",
+    description:
+      "组件语言沿用极简取向——白色卡片、细描边、柔和阴影、橙色只用于金额与状态；头部与底部改用低明度差的雾蓝渐变做大面积包裹，卡片上浮压住色块边界形成层次。相比深墨蓝首屏，雾蓝把厚重与严肃降下来，文字保持墨蓝深色以确保可读，整体轻盈、干净，适合既要专业感又不想过于强硬的品牌表达。",
+    palette: [
+      { name: "柔橙雾 Haze", cls: "bg-haze", hex: "#FDF5ED" },
+      { name: "卡面白 Card", cls: "bg-card border border-border", hex: "#FFFFFF" },
+      { name: "品牌橙 Brand", cls: "bg-brand", hex: "#F2871E" },
+      { name: "海军墨 Ink", cls: "bg-ink", hex: "#1E2A44" },
+    ],
+      screens: [
+        { code: "P-004-002", label: "乘客端首页（有订单）", node: <PassengerHomeV7 />, fluid: true, statusBar: "haze" },
+        { code: "P-006", label: "乘客端下单页 OrderForm", node: <PassengerOrderFormV7 />, fluid: true, statusBar: "flat" },
+        { code: "D-008-002", label: "司机端首页（有订单）", node: <DriverHomeV7 />, fluid: true, statusBar: "flat" },
+        { code: "D-009-001", label: "司机端订单池", node: <DriverOrderPoolV7 />, fluid: true, statusBar: "flat" },
+      ],
+
+  },
+  {
     id: "ins",
     name: "Ins",
     summary: "暖白底、大圆角与柔和投影的社交感",
@@ -111,7 +137,7 @@ const styles: Style[] = [
     palette: [
       { name: "暖白底 Cream", cls: "bg-[oklch(0.978_0.008_75)] border border-border", hex: "#FBF9F5" },
       { name: "品牌橙 Brand", cls: "bg-brand", hex: "#F2871E" },
-      { name: "浅橙标签 Soft", cls: "bg-brand-soft border border-border", hex: "#FDF0E2" },
+      { name: "浅橙标签 Soft", cls: "bg-brand-soft border border-border", hex: "#FEF8F2" },
       { name: "海军墨 Ink", cls: "bg-ink", hex: "#1E2A44" },
     ],
     screens: [
@@ -269,7 +295,9 @@ function StyleGuide() {
                 label={sc.label}
                 dark={!!sc.dark}
                 fluid={!!sc.fluid}
+                statusBar={sc.statusBar}
               >
+
                 {sc.node}
               </Phone>
             ))}

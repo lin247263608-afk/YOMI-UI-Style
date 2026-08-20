@@ -8,6 +8,7 @@ export function Phone({
   children,
   dark,
   fluid,
+  statusBar,
 }: {
   label: string;
   code: string;
@@ -15,6 +16,8 @@ export function Phone({
   dark?: boolean;
   /** 页面过长时不裁切，直接拉伸手机框高度 */
   fluid?: boolean;
+  /** 状态栏配色：默认跟随卡面，haze 渲染渐变包裹色，flat 渲染纯色柔雾橙 */
+  statusBar?: "haze" | "flat" | undefined;
 }) {
   return (
     <figure className="flex w-[375px] max-w-full shrink-0 flex-col gap-3">
@@ -28,7 +31,13 @@ export function Phone({
         <div
           className={cn(
             "flex h-11 items-center justify-between px-6 pt-1 text-[13px] font-semibold",
-            dark ? "bg-ink text-brand-foreground" : "bg-card text-ink",
+            statusBar === "haze"
+              ? "bg-haze-status text-ink"
+              : statusBar === "flat"
+                ? "bg-haze text-ink"
+                : dark
+                  ? "bg-ink text-brand-foreground"
+                  : "bg-card text-ink",
           )}
         >
           <span>9:41</span>
@@ -39,7 +48,7 @@ export function Phone({
             <span
               className={cn(
                 "ml-1 flex items-center gap-1 rounded-full border px-2 py-0.5",
-                dark ? "border-brand-foreground/30" : "border-ink/15",
+                dark && statusBar !== "haze" ? "border-brand-foreground/30" : "border-ink/15",
               )}
             >
               <MoreHorizontal className="size-3" />
@@ -47,6 +56,7 @@ export function Phone({
             </span>
           </div>
         </div>
+
         <div className={cn(fluid ? "flex min-h-[768px] flex-col [&>*]:flex-1" : "h-[768px] overflow-hidden")}>{children}</div>
       </div>
       <figcaption className="flex items-baseline gap-2 px-1">

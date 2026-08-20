@@ -69,6 +69,8 @@
   --color-ink-soft: var(--ink-soft);
   --color-surface: var(--surface);
   --color-surface-alt: var(--surface-alt);
+  --color-haze: var(--haze);
+  --color-haze-soft: var(--haze-soft);
   --font-sans: "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -79,7 +81,7 @@
   /* 品牌色：取自 YOMI logo —— 琥珀橙 / 深海军蓝墨 / 低饱和商务绿 */
   --brand: oklch(0.72 0.175 52);
   --brand-foreground: oklch(0.99 0.004 80);
-  --brand-soft: oklch(0.962 0.032 68);
+  --brand-soft: oklch(0.97 0.024 68);
   --go: oklch(0.58 0.105 162);
   --go-foreground: oklch(0.99 0.005 150);
   --go-soft: oklch(0.955 0.03 162);
@@ -87,6 +89,27 @@
   --ink-soft: oklch(0.46 0.03 264);
   --surface: oklch(1 0 0);
   --surface-alt: oklch(0.975 0.004 250);
+
+  /* 头尾大面积包裹色：由品牌浅橙过渡到背景，更轻更透气 */
+  --haze: oklch(0.975 0.03 68);
+  --haze-soft: oklch(0.985 0.016 70);
+  --gradient-haze-top: linear-gradient(
+    180deg,
+    oklch(0.985 0.018 66) 0%,
+    oklch(0.99 0.012 68) 40%,
+    oklch(0.993 0.008 70) 72%,
+    oklch(0.975 0.004 250) 100%
+  );
+  --gradient-haze-bottom: linear-gradient(
+    to top,
+    oklch(0.99 0.008 68) 0%,
+    oklch(0.99 0.008 68) 100%
+  );
+  --gradient-haze-status: linear-gradient(
+    180deg,
+    oklch(0.98 0.022 62) 0%,
+    oklch(0.985 0.018 66) 100%
+  );
 
   --gradient-brand: linear-gradient(135deg, oklch(0.79 0.155 72), oklch(0.68 0.185 44));
   --gradient-ink: linear-gradient(160deg, oklch(0.31 0.04 263), oklch(0.2 0.032 265));
@@ -204,4 +227,15 @@
     width: 0;
     height: 0;
   }
+}
+
+/* Soft Business —— 降低厚重感的顶/底大面积入侵色 */
+@utility bg-haze-top {
+  background-image: var(--gradient-haze-top);
+}
+@utility bg-haze-bottom {
+  background-image: var(--gradient-haze-bottom);
+}
+@utility bg-haze-status {
+  background-image: var(--gradient-haze-status);
 }
